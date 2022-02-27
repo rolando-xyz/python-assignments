@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="d-flex justify-content-between align-items-center py-2 px-5 bg-secondary">
+        <h1 class="text-info">ROCK ON {{ user.first_name }} !</h1>
+        <a href="/mybands" class="btn btn-info bg-primary">MY BANDS</a>
+        <a href="/new" class="btn btn-info bg-primary">NEW BAND</a>
+        <a href="/logout" class="btn btn-info bg-danger">LOGOUT</a>
+    </div>
+    <hr>
+    <main class="d-flex justify-content-around">
+        <div class="col-10 bg-dark text-light">
+            <h2 class="text-center">ALL BANDS</h2>
+            <hr class="bg-info">
+            <div class="d-flex flex-row justify-content-between card bg-dark my-2">
+                <table class="table table-hover text-light">
+                    <thead>
+                        <tr>
+                            <th>BAND NAME</th>
+                            <th>FOUNDING MEMBER</th>
+                            <th>GENRE</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for band in bands %}
+                        <tr>
+                            <td>{{ band.band_name }}</td>
+                            <td>{{ band.founded_by }}</td>
+                            <td>{{ band.genre }}</td>
+                            <td>
+                                {% if user.id == band.user.id %}
+                                <a href="/edit/{{ band.id }}">EDIT</a>
+                                <a href="/destroy/band/{{ band.id }}">DELETE</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
